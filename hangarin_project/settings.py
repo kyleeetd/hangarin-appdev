@@ -18,18 +18,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',   
+    # allauth apps
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
-    'allauth',                
-    'allauth.account',        
-    'allauth.socialaccount',  
+    # Providers
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
 
-    'allauth.socialaccount.providers.google',  
-
-    'tasks',                  
+    'tasks',
 ]
 
-SITE_ID = 1  
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -85,8 +91,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # Default
-    'allauth.account.auth_backends.AuthenticationBackend',  # ✅ for allauth
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
