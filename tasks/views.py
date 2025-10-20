@@ -4,8 +4,20 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, T
 from django.urls import reverse_lazy
 from .models import Category, Priority, Task, SubTask, Note
 from .forms import CategoryForm, PriorityForm, TaskForm, SubTaskForm, NoteForm
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
-# Helper ListView that supports ?q=search & ?order=field
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")  # redirect to login after signup
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/signup.html", {"form": form})
+
+
 class BaseListView(ListView):
     paginate_by = 12
 
